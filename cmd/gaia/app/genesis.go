@@ -11,6 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/server/config"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/circuit"
 	"github.com/cosmos/cosmos-sdk/x/gov"
 	"github.com/cosmos/cosmos-sdk/x/slashing"
 	"github.com/cosmos/cosmos-sdk/x/stake"
@@ -36,6 +37,7 @@ type GenesisState struct {
 	StakeData    stake.GenesisState    `json:"stake"`
 	GovData      gov.GenesisState      `json:"gov"`
 	SlashingData slashing.GenesisState `json:"slashing"`
+	CircuitData  circuit.GenesisState  `json:"circuit"`
 }
 
 // GenesisAccount doesn't need pubkey or sequence
@@ -172,6 +174,8 @@ func GaiaAppGenState(cdc *codec.Codec, appGenTxs []json.RawMessage) (genesisStat
 
 	slashingData := slashing.DefaultGenesisState()
 
+	circuitData := circuit.DefaultGenesisState()
+
 	// get genesis flag account information
 	genaccs := make([]GenesisAccount, len(appGenTxs))
 	for i, appGenTx := range appGenTxs {
@@ -198,6 +202,7 @@ func GaiaAppGenState(cdc *codec.Codec, appGenTxs []json.RawMessage) (genesisStat
 		StakeData:    stakeData,
 		GovData:      gov.DefaultGenesisState(),
 		SlashingData: slashingData,
+		CircuitData:  circuitData,
 	}
 
 	return
