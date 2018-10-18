@@ -49,8 +49,8 @@ type Params struct {
 }
 
 // Implements params.ParamSet
-func (p *Params) KeyValuePairs() params.KeyValuePairs {
-	return params.KeyValuePairs{
+func (p *Params) ParamSetPairs() params.ParamSetPairs {
+	return params.ParamSetPairs{
 		{KeyInflationRateChange, &p.InflationRateChange},
 		{KeyInflationMax, &p.InflationMax},
 		{KeyInflationMin, &p.InflationMin},
